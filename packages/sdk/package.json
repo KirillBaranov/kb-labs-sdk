@@ -1,0 +1,89 @@
+{
+  "name": "@kb-labs/sdk",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Stable facade for KB Labs plugins (CLI/REST), exposing command/manifest/helpers in one entry.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./cli": {
+      "import": "./dist/cli.js",
+      "types": "./dist/cli.d.ts"
+    },
+    "./manifest": {
+      "import": "./dist/manifest.js",
+      "types": "./dist/manifest.d.ts"
+    },
+    "./helpers": {
+      "import": "./dist/helpers.js",
+      "types": "./dist/helpers.d.ts"
+    },
+    "./rest": {
+      "import": "./dist/rest.js",
+      "types": "./dist/rest.d.ts"
+    },
+    "./lifecycle": {
+      "import": "./dist/lifecycle.js",
+      "types": "./dist/lifecycle.d.ts"
+    },
+    "./jobs": {
+      "import": "./dist/jobs.js",
+      "types": "./dist/jobs.d.ts"
+    },
+    "./schema": {
+      "import": "./dist/schema.js",
+      "types": "./dist/schema.d.ts"
+    },
+    "./ui": {
+      "import": "./dist/ui.js",
+      "types": "./dist/ui.d.ts"
+    },
+    "./experimental": {
+      "import": "./dist/experimental.js",
+      "types": "./dist/experimental.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@kb-labs/cli-contracts": "link:../../../kb-labs-cli/packages/cli-contracts",
+    "@kb-labs/core-platform": "link:../../../kb-labs-core/packages/core-platform",
+    "@kb-labs/core-sandbox": "link:../../../kb-labs-core/packages/core-sandbox",
+    "@kb-labs/core-workspace": "link:../../../kb-labs-core/packages/core-workspace",
+    "@kb-labs/core-runtime": "link:../../../kb-labs-core/packages/core-runtime",
+    "@kb-labs/core-sys": "link:../../../kb-labs-core/packages/core-sys",
+    "@kb-labs/plugin-manifest": "link:../../../kb-labs-plugin/packages/plugin-manifest",
+    "@kb-labs/plugin-runtime": "link:../../../kb-labs-plugin/packages/plugin-runtime",
+    "@kb-labs/rest-api-contracts": "link:../../../kb-labs-rest-api/packages/rest-api-contracts",
+    "@kb-labs/shared-cli-ui": "link:../../../kb-labs-shared/packages/shared-cli-ui",
+    "@kb-labs/shared-command-kit": "link:../../../kb-labs-shared/packages/shared-command-kit",
+    "execa": "^9.5.2",
+    "glob": "^10.4.5",
+    "minimatch": "^9.0.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@kb-labs/devkit": "link:../../../kb-labs-devkit",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.5",
+    "vitest": "^3.2.4"
+  }
+}
