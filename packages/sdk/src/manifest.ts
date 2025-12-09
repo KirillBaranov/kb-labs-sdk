@@ -7,6 +7,7 @@ export {
 export {
   validateManifestV2,
   manifestV2Schema,
+  generateExamples,
 } from '@kb-labs/plugin-manifest';
 
 export type {

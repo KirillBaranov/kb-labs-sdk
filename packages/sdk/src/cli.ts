@@ -5,6 +5,9 @@ import {
   FlagValidationError,
   withAnalytics,
   trackEvent,
+  defineError,
+  PluginError,
+  commonErrors,
   type CommandResult,
   type CommandHandler,
   type CommandFormatter,
@@ -12,6 +15,8 @@ import {
   type SuccessResult,
   type ErrorResult,
   type ResultWith,
+  type FlagSchemaDefinition,
+  type InferFlags,
 } from '@kb-labs/shared-command-kit';
 
 export {
@@ -21,6 +26,9 @@ export {
   FlagValidationError,
   withAnalytics,
   trackEvent,
+  defineError,
+  PluginError,
+  commonErrors,
 };
 
 export type {
@@ -31,6 +39,8 @@ export type {
   SuccessResult,
   ErrorResult,
   ResultWith,
+  FlagSchemaDefinition,
+  InferFlags,
 };
 
 export type { CliContext } from '@kb-labs/cli-contracts';

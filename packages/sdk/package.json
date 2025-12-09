@@ -88,6 +88,7 @@
     "@kb-labs/plugin-manifest": "link:../../../kb-labs-plugin/packages/plugin-manifest",
     "@kb-labs/plugin-runtime": "link:../../../kb-labs-plugin/packages/plugin-runtime",
     "@kb-labs/rest-api-contracts": "link:../../../kb-labs-rest-api/packages/rest-api-contracts",
+    "@kb-labs/setup-engine-operations": "link:../../../kb-labs-setup-engine/packages/setup-engine-operations",
     "@kb-labs/shared-cli-ui": "link:../../../kb-labs-shared/packages/shared-cli-ui",
     "@kb-labs/shared-command-kit": "link:../../../kb-labs-shared/packages/shared-command-kit",
     "execa": "^9.5.2",
