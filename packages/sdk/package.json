@@ -22,6 +22,18 @@
       "import": "./dist/helpers.js",
       "types": "./dist/helpers.d.ts"
     },
+    "./config": {
+      "import": "./dist/config.js",
+      "types": "./dist/config.d.ts"
+    },
+    "./platform": {
+      "import": "./dist/platform.js",
+      "types": "./dist/platform.d.ts"
+    },
+    "./knowledge": {
+      "import": "./dist/knowledge.js",
+      "types": "./dist/knowledge.d.ts"
+    },
     "./rest": {
       "import": "./dist/rest.js",
       "types": "./dist/rest.d.ts"
@@ -65,11 +77,14 @@
   },
   "dependencies": {
     "@kb-labs/cli-contracts": "link:../../../kb-labs-cli/packages/cli-contracts",
+    "@kb-labs/core-config": "link:../../../kb-labs-core/packages/core-config",
     "@kb-labs/core-platform": "link:../../../kb-labs-core/packages/core-platform",
     "@kb-labs/core-sandbox": "link:../../../kb-labs-core/packages/core-sandbox",
     "@kb-labs/core-workspace": "link:../../../kb-labs-core/packages/core-workspace",
     "@kb-labs/core-runtime": "link:../../../kb-labs-core/packages/core-runtime",
     "@kb-labs/core-sys": "link:../../../kb-labs-core/packages/core-sys",
+    "@kb-labs/knowledge-contracts": "link:../../../kb-labs-knowledge/packages/knowledge-contracts",
+    "@kb-labs/knowledge-core": "link:../../../kb-labs-knowledge/packages/knowledge-core",
     "@kb-labs/plugin-manifest": "link:../../../kb-labs-plugin/packages/plugin-manifest",
     "@kb-labs/plugin-runtime": "link:../../../kb-labs-plugin/packages/plugin-runtime",
     "@kb-labs/rest-api-contracts": "link:../../../kb-labs-rest-api/packages/rest-api-contracts",
@@ -78,6 +93,8 @@
     "execa": "^9.5.2",
     "glob": "^10.4.5",
     "minimatch": "^9.0.4",
+    "picomatch": "^4.0.2",
+    "yaml": "^2.8.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -11,6 +11,9 @@ importers:
       '@kb-labs/cli-contracts':
         specifier: link:../../../kb-labs-cli/packages/cli-contracts
         version: link:../../../kb-labs-cli/packages/cli-contracts
+      '@kb-labs/core-config':
+        specifier: link:../../../kb-labs-core/packages/core-config
+        version: link:../../../kb-labs-core/packages/core-config
       '@kb-labs/core-platform':
         specifier: link:../../../kb-labs-core/packages/core-platform
         version: link:../../../kb-labs-core/packages/core-platform
@@ -26,6 +29,12 @@ importers:
       '@kb-labs/core-workspace':
         specifier: link:../../../kb-labs-core/packages/core-workspace
         version: link:../../../kb-labs-core/packages/core-workspace
+      '@kb-labs/knowledge-contracts':
+        specifier: link:../../../kb-labs-knowledge/packages/knowledge-contracts
+        version: link:../../../kb-labs-knowledge/packages/knowledge-contracts
+      '@kb-labs/knowledge-core':
+        specifier: link:../../../kb-labs-knowledge/packages/knowledge-core
+        version: link:../../../kb-labs-knowledge/packages/knowledge-core
       '@kb-labs/plugin-manifest':
         specifier: link:../../../kb-labs-plugin/packages/plugin-manifest
         version: link:../../../kb-labs-plugin/packages/plugin-manifest

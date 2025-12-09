@@ -17,4 +17,14 @@ export type {
   PermissionSpec,
   PlatformRequirements,
   DisplayMetadata,
+  // Studio widget types
+  CardData,
+  CardListData,
+  InfoPanelSection,
+  InfoPanelData,
+  KeyValueItem,
+  KeyValueData,
+  // Handler type
+  Handler,
+  // Note: PluginContext is exported from platform.ts to avoid conflicts
 } from '@kb-labs/plugin-manifest';
