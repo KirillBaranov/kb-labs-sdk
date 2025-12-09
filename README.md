@@ -231,6 +231,8 @@ import {
 } from '@kb-labs/sdk';
 ```
 
+
+
 ## License
 
-MIT
+MIT License - see [LICENSE](LICENSE) for details.
