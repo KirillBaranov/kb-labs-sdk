@@ -19,11 +19,21 @@ export type {
   IAnalytics,
   ILogger,
   IStorage,
+  ICache,
+  IEmbeddings,
+  IVectorStore,
+  IHistoryStore,
+  IFeedbackStore,
+  HistoryRecord,
+  FeedbackRecord,
   IResourceManager,
   ResourceAvailability,
   ResourceType,
   TenantQuotas,
 } from '@kb-labs/core-platform';
+
+// Learning stores (platform-level)
+export { MemoryHistoryStore, MemoryFeedbackStore } from '@kb-labs/core-platform';
 
 // Plugin manifest types
 export type {
