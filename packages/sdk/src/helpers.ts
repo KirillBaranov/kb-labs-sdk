@@ -1,6 +1,7 @@
 import {
   usePlatform as baseUsePlatform,
   isPlatformConfigured,
+  useConfig,
   useLLM,
   isLLMAvailable,
   useAnalytics,
@@ -27,6 +28,7 @@ import { findRepoRoot } from '@kb-labs/core-sys';
 export const usePlatform = baseUsePlatform;
 export {
   isPlatformConfigured,
+  useConfig,
   useLLM,
   isLLMAvailable,
   useAnalytics,
