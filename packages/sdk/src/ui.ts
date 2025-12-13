@@ -3,6 +3,7 @@ export {
   safeKeyValue,
   formatTiming,
   formatTimingBreakdown,
+  useLoader,
 } from '@kb-labs/shared-cli-ui';
 
 export { displayArtifactsCompact } from '@kb-labs/shared-cli-ui';
