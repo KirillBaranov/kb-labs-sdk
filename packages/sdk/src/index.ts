@@ -47,3 +47,6 @@ export type {
 
 // CLI context type
 export type { CliContext } from '@kb-labs/cli-contracts';
+
+// Plugin runtime types
+export type { PluginHandlerContext } from '@kb-labs/plugin-runtime';
