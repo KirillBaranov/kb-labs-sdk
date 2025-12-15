@@ -7,7 +7,8 @@ export {
   discoverArtifacts,
 } from '@kb-labs/shared-cli-ui';
 
-export { displayArtifactsCompact } from '@kb-labs/shared-cli-ui';
+export { displayArtifacts, displayArtifactsCompact } from '@kb-labs/shared-cli-ui';
+export type { ArtifactInfo, ArtifactDisplayOptions } from '@kb-labs/shared-cli-ui';
 export { TimingTracker } from '@kb-labs/shared-cli-ui';
 
 // Output interface from core-sys
