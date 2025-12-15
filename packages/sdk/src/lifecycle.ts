@@ -41,7 +41,7 @@ export interface SetupConfigSection<TValue = unknown> {
   pointer: string;
   /** Value to merge */
   value: TValue;
-  /** Config file path (default: .kb/kb-labs.config.json) */
+  /** Config file path (default: .kb/kb.config.json) */
   path?: string;
   /** Merge strategy */
   strategy?: 'shallow' | 'deep' | 'replace';
@@ -86,6 +86,8 @@ export interface SetupConfig<TConfigValue = unknown> {
 export interface SetupOutput {
   /** Operations to execute */
   operations: OperationWithMetadata[];
+  /** Config defaults to merge into profiles (handled by plugin-setup-command) */
+  configDefaults?: Record<string, unknown>;
   /** Suggested gitignore patterns */
   gitignore?: string[];
   /** Notes for the user */
@@ -155,12 +157,22 @@ export function defineSetup<TConfigValue = unknown>(
     });
   }
 
-  // Add config sections
+  // Config sections are NOT added as operations - they are returned as configDefaults
+  // and handled by plugin-setup-command which writes to all profiles (Profiles v2)
+  // Extract config defaults from config sections with 'plugins.*' pointer pattern
+  let configDefaults: Record<string, unknown> | undefined;
   for (const section of config.config ?? []) {
-    builder.ensureConfigSection(section.pointer, section.value, {
-      path: section.path,
-      strategy: section.strategy,
-    });
+    // Only handle plugins.* pointers - these go to configDefaults
+    // Other pointers (custom paths) still go through operations
+    if (section.pointer.startsWith('plugins.')) {
+      configDefaults = section.value as Record<string, unknown>;
+    } else {
+      // Non-plugin config goes through operations (for custom config files)
+      builder.ensureConfigSection(section.pointer, section.value, {
+        path: section.path,
+        strategy: section.strategy,
+      });
+    }
   }
 
   // Add scripts
@@ -173,6 +185,7 @@ export function defineSetup<TConfigValue = unknown>(
 
   return {
     operations: builder.build().operations,
+    configDefaults,
     gitignore: config.gitignore,
     notes: config.notes,
   };
