@@ -1,0 +1,78 @@
+{
+  "name": "@kb-labs/sdk",
+  "version": "0.1.3",
+  "description": "Plugin System SDK - Helpers for command/route/action/webhook definitions and testing",
+  "type": "module",
+  "author": {
+    "name": "Kirill Baranov",
+    "url": "https://github.com/kirill-baranov"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kirill-baranov/kb-labs-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kirill-baranov/kb-labs-sdk/issues"
+  },
+  "homepage": "https://github.com/kirill-baranov/kb-labs-sdk#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "// ——— devkit": "────────────────────────────────────────",
+    "devkit:sync": "node scripts/devkit-sync.mjs",
+    "predevkit:sync": "pnpm devkit:paths",
+    "devkit:paths": "pnpm exec kb-devkit-paths",
+    "devkit:sync:ci": "node scripts/devkit-sync.mjs --ci-only",
+    "predevkit:sync:ci": "pnpm devkit:paths",
+    "devkit:check": "node scripts/devkit-sync.mjs --check",
+    "predevkit:check": "pnpm devkit:paths",
+    "devkit:force": "node scripts/devkit-sync.mjs --force",
+    "predevkit:force": "pnpm devkit:paths",
+    "devkit:help": "node scripts/devkit-sync.mjs --help",
+    "postinstall": "pnpm -s devkit:sync || true",
+    "// ——— core": "────────────────────────────────────────",
+    "clean": "rimraf dist",
+    "build": "pnpm -r run build",
+    "build:clean": "pnpm -r run clean && pnpm -r run build",
+    "dev": "pnpm -r --parallel run dev",
+    "// ——— quality": "────────────────────────────────────────",
+    "lint": "pnpm -r run lint",
+    "lint:fix": "pnpm -r run lint:fix",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "type-check": "tsc -b tsconfig.tools.json",
+    "// ——— ci/qa": "────────────────────────────────────────",
+    "check": "pnpm lint && pnpm type-check && pnpm test -- --run",
+    "ci": "pnpm clean && pnpm build && pnpm check",
+    "// ——— cleanup": "────────────────────────────────────────",
+    "clean:all": "rimraf node_modules packages/*/node_modules dist"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,md,yml,yaml}": [
+      "prettier -w"
+    ],
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@kb-labs/devkit": "link:../kb-labs-devkit",
+    "@types/node": "^24.3.3",
+    "@vitest/coverage-v8": "^3.2.4",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.11.0",
+  "private": true
+}
