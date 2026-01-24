@@ -2,6 +2,73 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@kb-labs/core-config": [
+        "../kb-labs-core/packages/core-config/src/index.ts"
+      ],
+      "@kb-labs/core-config/*": [
+        "../kb-labs-core/packages/core-config/src/*"
+      ],
+      "@kb-labs/core-platform": [
+        "../kb-labs-core/packages/core-platform/src/index.ts"
+      ],
+      "@kb-labs/core-platform/*": [
+        "../kb-labs-core/packages/core-platform/src/*"
+      ],
+      "@kb-labs/core-runtime": [
+        "../kb-labs-core/packages/core-runtime/src/index.ts"
+      ],
+      "@kb-labs/core-runtime/*": [
+        "../kb-labs-core/packages/core-runtime/src/*"
+      ],
+      "@kb-labs/core-sys": [
+        "../kb-labs-core/packages/core-sys/src/index.ts"
+      ],
+      "@kb-labs/core-sys/*": [
+        "../kb-labs-core/packages/core-sys/src/*"
+      ],
+      "@kb-labs/knowledge-contracts": [
+        "../kb-labs-knowledge/packages/knowledge-contracts/src/index.ts"
+      ],
+      "@kb-labs/knowledge-contracts/*": [
+        "../kb-labs-knowledge/packages/knowledge-contracts/src/*"
+      ],
+      "@kb-labs/knowledge-core": [
+        "../kb-labs-knowledge/packages/knowledge-core/src/index.ts"
+      ],
+      "@kb-labs/knowledge-core/*": [
+        "../kb-labs-knowledge/packages/knowledge-core/src/*"
+      ],
+      "@kb-labs/perm-presets": [
+        "../kb-labs-shared/packages/shared-perm-presets/src/index.ts"
+      ],
+      "@kb-labs/perm-presets/*": [
+        "../kb-labs-shared/packages/shared-perm-presets/src/*"
+      ],
+      "@kb-labs/plugin-contracts": [
+        "../kb-labs-plugin/packages/plugin-contracts/src/index.ts"
+      ],
+      "@kb-labs/plugin-contracts/*": [
+        "../kb-labs-plugin/packages/plugin-contracts/src/*"
+      ],
+      "@kb-labs/shared-cli-ui": [
+        "../kb-labs-shared/packages/shared-cli-ui/src/index.ts"
+      ],
+      "@kb-labs/shared-cli-ui/*": [
+        "../kb-labs-shared/packages/shared-cli-ui/src/*"
+      ],
+      "@kb-labs/shared-command-kit": [
+        "../kb-labs-shared/packages/shared-command-kit/src/index.ts"
+      ],
+      "@kb-labs/shared-command-kit/*": [
+        "../kb-labs-shared/packages/shared-command-kit/src/*"
+      ],
+      "@kb-labs/studio-contracts": [
+        "../kb-labs-studio/packages/studio-contracts/src/index.ts"
+      ],
+      "@kb-labs/studio-contracts/*": [
+        "../kb-labs-studio/packages/studio-contracts/src/*"
+      ]
+    }
   }
 }

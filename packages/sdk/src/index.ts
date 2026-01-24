@@ -55,17 +55,6 @@ export {
   displaySingleArtifact,
   type Loader,
   type ArtifactInfo,
-  // Flags system
-  defineFlags,
-  mergeFlags,
-  parseFlagsFromInput,
-  type FlagsDefinition,
-  type FlagsSchema,
-  type FlagSpec,
-  type StringFlagSpec,
-  type BooleanFlagSpec,
-  type NumberFlagSpec,
-  type InferFlagsType,
   // Env system
   defineEnv,
   parseEnvFromRuntime,
@@ -106,6 +95,23 @@ export {
   // LLM types (for tier-based selection)
   type LLMTier,
   type UseLLMOptions,
+} from '@kb-labs/shared-command-kit';
+
+// Re-export new flags system from shared-command-kit
+export {
+  defineFlags,
+  type FlagSchemaWithInfer,
+  type InferFlags,
+  type FlagSchemaDefinition,
+  type FlagSchema,
+  type BooleanFlagSchema,
+  type StringFlagSchema,
+  type NumberFlagSchema,
+  type ArrayFlagSchema,
+  type FlagType,
+  type FlagValidationError,
+  type ValidationResult,
+  type SafeValidationResult,
 } from '@kb-labs/shared-command-kit';
 
 // Re-export platform adapter types from core-platform
@@ -178,6 +184,8 @@ export type {
   KnowledgeSource,
   KnowledgeSourceKind,
   KnowledgeConfigInput,
+  KnowledgeCapability,
+  KnowledgeCapabilityRegistry,
   SpanRange,
   IndexingStats,
   AgentQueryMode,
