@@ -91,6 +91,8 @@ exports[`SDK Exports Snapshot > should match snapshot of all exported names 1`] 
 [
   "AGENT_RESPONSE_SCHEMA_VERSION",
   "CONFIDENCE_THRESHOLDS",
+  "FileFeedbackStore",
+  "FileHistoryStore",
   "KnowledgeEngineRegistry",
   "KnowledgeError",
   "KnowledgeOrchestrator",
@@ -145,11 +147,9 @@ exports[`SDK Exports Snapshot > should match snapshot of all exported names 1`] 
   "isWorkflowHost",
   "kbPlatformPreset",
   "llmAccessPreset",
-  "mergeFlags",
   "minimalPreset",
   "npmPublishPreset",
   "parseEnvFromRuntime",
-  "parseFlagsFromInput",
   "presets",
   "readJsonWithDiagnostics",
   "trackAnalyticsEvent",
@@ -170,6 +170,8 @@ exports[`SDK Exports Snapshot > should match snapshot of all exported names 1`] 
 
 exports[`SDK Exports Snapshot > should match snapshot of exported functions 1`] = `
 [
+  "FileFeedbackStore",
+  "FileHistoryStore",
   "KnowledgeEngineRegistry",
   "KnowledgeError",
   "KnowledgeOrchestrator",
@@ -218,9 +220,7 @@ exports[`SDK Exports Snapshot > should match snapshot of exported functions 1`] 
   "isWSHost",
   "isWebhookHost",
   "isWorkflowHost",
-  "mergeFlags",
   "parseEnvFromRuntime",
-  "parseFlagsFromInput",
   "readJsonWithDiagnostics",
   "trackAnalyticsEvent",
   "useAnalytics",

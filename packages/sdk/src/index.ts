@@ -34,7 +34,7 @@ export {
   MessageRouter,
 } from './command/index.js';
 
-// Test utilities
+// Test utilities (legacy — prefer `@kb-labs/sdk/testing` for full mock builders)
 export {
   createTestContext,
   type CreateTestContextOptions,
@@ -152,7 +152,22 @@ export {
 } from '@kb-labs/core-runtime';
 
 // Re-export learning stores from platform
-export { MemoryHistoryStore, MemoryFeedbackStore } from '@kb-labs/core-platform';
+export type {
+  IHistoryStore,
+  HistoryRecord,
+  HistoryFindOptions,
+  IFeedbackStore,
+  FeedbackRecord,
+  FeedbackType,
+} from '@kb-labs/core-platform';
+export {
+  MemoryHistoryStore,
+  MemoryFeedbackStore,
+  FileHistoryStore,
+  FileFeedbackStore,
+  type FileHistoryStoreOptions,
+  type FileFeedbackStoreOptions,
+} from '@kb-labs/core-platform';
 
 // Re-export knowledge utilities from knowledge-core
 export type {
