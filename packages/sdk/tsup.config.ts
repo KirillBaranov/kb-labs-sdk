@@ -6,5 +6,6 @@ export default defineConfig({
   tsconfig: "tsconfig.build.json",
   entry: {
     index: 'src/index.ts',
+    'testing/index': 'src/testing/index.ts',
   },
 });

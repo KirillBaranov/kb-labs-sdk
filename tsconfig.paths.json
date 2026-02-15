@@ -63,6 +63,12 @@
       "@kb-labs/shared-command-kit/*": [
         "../kb-labs-shared/packages/shared-command-kit/src/*"
       ],
+      "@kb-labs/shared-testing": [
+        "../kb-labs-shared/packages/shared-testing/src/index.ts"
+      ],
+      "@kb-labs/shared-testing/*": [
+        "../kb-labs-shared/packages/shared-testing/src/*"
+      ],
       "@kb-labs/studio-contracts": [
         "../kb-labs-studio/packages/studio-contracts/src/index.ts"
       ],
