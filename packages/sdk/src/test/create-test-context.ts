@@ -248,6 +248,14 @@ function createMockPlatform(): PlatformServices {
       publish: asyncNoop,
       subscribe: () => () => {},
     },
+    logs: {
+      query: async () => ({ logs: [], total: 0, hasMore: false, source: 'buffer' as const }),
+      getById: async () => null,
+      search: async () => ({ logs: [], total: 0, hasMore: false }),
+      subscribe: () => () => {},
+      getStats: async () => ({}),
+      getCapabilities: () => ({ hasBuffer: false, hasPersistence: false, hasSearch: false, hasStreaming: false }),
+    },
   };
 }
 
@@ -302,6 +310,7 @@ function createMockRuntime(): RuntimeAPI {
  */
 function createMockPluginAPI(): PluginAPI {
   const asyncNoop = async () => {};
+  const now = () => new Date().toISOString();
 
   return {
     lifecycle: {
@@ -354,6 +363,77 @@ function createMockPluginAPI(): PluginAPI {
       pause: asyncNoop,
       resume: asyncNoop,
       trigger: asyncNoop,
+    },
+    environment: {
+      create: async () => ({
+        environmentId: 'env_mock_1',
+        provider: 'mock',
+        status: 'ready',
+        createdAt: now(),
+        updatedAt: now(),
+      }),
+      status: async (environmentId: string) => ({
+        environmentId,
+        status: 'ready',
+        updatedAt: now(),
+      }),
+      destroy: asyncNoop,
+      renewLease: async () => ({
+        leaseId: 'lease_mock_1',
+        acquiredAt: now(),
+        expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
+      }),
+    },
+    workspace: {
+      materialize: async () => ({
+        workspaceId: 'ws_mock_1',
+        provider: 'mock',
+        status: 'ready',
+        rootPath: '/tmp/ws_mock_1',
+        createdAt: now(),
+        updatedAt: now(),
+      }),
+      attach: async (request) => ({
+        workspaceId: request.workspaceId,
+        environmentId: request.environmentId,
+        mountPath: request.mountPath ?? '/workspace',
+        attachedAt: now(),
+      }),
+      release: asyncNoop,
+      status: async (workspaceId: string) => ({
+        workspaceId,
+        status: 'ready',
+        updatedAt: now(),
+      }),
+    },
+    snapshot: {
+      capture: async (request) => ({
+        snapshotId: request.snapshotId ?? 'snap_mock_1',
+        provider: 'mock',
+        status: 'ready',
+        createdAt: now(),
+        updatedAt: now(),
+        workspaceId: request.workspaceId,
+        environmentId: request.environmentId,
+      }),
+      restore: async (request) => ({
+        snapshotId: request.snapshotId,
+        restoredAt: now(),
+        workspaceId: request.workspaceId,
+        environmentId: request.environmentId,
+        targetPath: request.targetPath,
+      }),
+      status: async (snapshotId: string) => ({
+        snapshotId,
+        status: 'ready',
+        updatedAt: now(),
+      }),
+      delete: asyncNoop,
+      gc: async (request) => ({
+        scanned: 0,
+        deleted: 0,
+        dryRun: request?.dryRun ?? false,
+      }),
     },
   };
 }

@@ -41,6 +41,16 @@ export {
 
   // Context factory
   createTestContext,
+  createMockPluginContextV3,
+  createMockPlatformApi,
+  createMockPluginAPI,
+  createMockEnvironmentAPI,
+  createMockWorkspaceAPI,
+  createMockSnapshotAPI,
+  createInfraApiMocks,
+  createMockRuntime,
+  createMockUI,
+  createMockTrace,
   type CreateTestContextOptions,
   type TestContextResult,
 
@@ -50,3 +60,9 @@ export {
   type TestCommandOptions,
   type TestCommandResult,
 } from '@kb-labs/shared-testing';
+
+// Tool mock builder
+export {
+  mockTool,
+  type MockToolInstance,
+} from '@kb-labs/shared-tool-kit/testing';

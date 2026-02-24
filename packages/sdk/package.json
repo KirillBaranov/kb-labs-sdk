@@ -1,6 +1,6 @@
 {
   "name": "@kb-labs/sdk",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "Core SDK - Helpers for command/route/action/webhook definitions and testing",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -33,17 +33,15 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@kb-labs/core-config": "link:../../../kb-labs-core/packages/core-config",
     "@kb-labs/core-platform": "link:../../../kb-labs-core/packages/core-platform",
     "@kb-labs/core-runtime": "link:../../../kb-labs-core/packages/core-runtime",
     "@kb-labs/core-sys": "link:../../../kb-labs-core/packages/core-sys",
-    "@kb-labs/knowledge-contracts": "link:../../../kb-labs-knowledge/packages/knowledge-contracts",
-    "@kb-labs/knowledge-core": "link:../../../kb-labs-knowledge/packages/knowledge-core",
     "@kb-labs/perm-presets": "link:../../../kb-labs-shared/packages/shared-perm-presets",
     "@kb-labs/plugin-contracts": "link:../../../kb-labs-plugin/packages/plugin-contracts",
     "@kb-labs/shared-cli-ui": "link:../../../kb-labs-shared/packages/shared-cli-ui",
     "@kb-labs/shared-command-kit": "link:../../../kb-labs-shared/packages/shared-command-kit",
     "@kb-labs/shared-testing": "link:../../../kb-labs-shared/packages/shared-testing",
+    "@kb-labs/shared-tool-kit": "link:../../../kb-labs-shared/packages/shared-tool-kit",
     "@kb-labs/studio-contracts": "link:../../../kb-labs-studio/packages/studio-contracts"
   },
   "devDependencies": {

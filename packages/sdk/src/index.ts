@@ -135,10 +135,6 @@ export type {
 // Re-export sys utilities
 export { findRepoRoot } from '@kb-labs/core-sys';
 
-// TODO: Remove after migrating all Mind commands to V3
-// Re-export config utilities (for legacy code - V3 commands should use useConfig())
-// Used in: mind-cli/src/application/sync.ts, mind-cli/src/shared/knowledge.ts
-export { findNearestConfig, readJsonWithDiagnostics, type FindNearestConfigOpts } from '@kb-labs/core-config';
 
 // Re-export monitoring from runtime
 export {
@@ -169,65 +165,6 @@ export {
   type FileFeedbackStoreOptions,
 } from '@kb-labs/core-platform';
 
-// Re-export knowledge utilities from knowledge-core
-export type {
-  KnowledgeService,
-  KnowledgeServiceOptions,
-  KnowledgeEngine,
-  KnowledgeEngineFactory,
-  KnowledgeEngineFactoryContext,
-  KnowledgeExecutionContext,
-  KnowledgeIndexOptions,
-  KnowledgeLogger,
-  KnowledgeErrorCode,
-  KnowledgeErrorDetail,
-} from '@kb-labs/knowledge-core';
-
-export {
-  createKnowledgeService,
-  KnowledgeOrchestrator,
-  KnowledgeEngineRegistry,
-  createKnowledgeEngineRegistry,
-  KnowledgeError,
-  createKnowledgeError,
-} from '@kb-labs/knowledge-core';
-
-// Re-export knowledge types and constants from knowledge-contracts
-export type {
-  KnowledgeChunk,
-  KnowledgeIntent,
-  EmbeddingVector,
-  KnowledgeEngineConfig,
-  KnowledgeQuery,
-  KnowledgeResult,
-  KnowledgeScope,
-  KnowledgeSource,
-  KnowledgeSourceKind,
-  KnowledgeConfigInput,
-  KnowledgeCapability,
-  KnowledgeCapabilityRegistry,
-  SpanRange,
-  IndexingStats,
-  AgentQueryMode,
-  AgentSourceKind,
-  AgentSource,
-  AgentMeta,
-  AgentSuggestion,
-  AgentWarning,
-  AgentWarningCode,
-  AgentDebugInfo,
-  AgentSourcesSummary,
-  AgentResponse,
-  AgentErrorCode,
-  AgentErrorResponse,
-} from '@kb-labs/knowledge-contracts';
-
-export {
-  AGENT_RESPONSE_SCHEMA_VERSION,
-  CONFIDENCE_THRESHOLDS,
-  isAgentError,
-  isAgentSuccess,
-} from '@kb-labs/knowledge-contracts';
 
 // Manifest utilities
 export {
@@ -255,6 +192,7 @@ export type {
   RuntimeAPI,
   PluginAPI,
   CommandResult,
+  ExecutionTarget,
   CleanupFn,
   // Shell API types
   ShellAPI,
@@ -269,6 +207,14 @@ export type {
   WSLifecycleEvent,
   WSInput,
 } from '@kb-labs/plugin-contracts';
+
+// Re-export tool factory
+export {
+  createTool,
+  type ToolSpec,
+  type ToolShape,
+  type ToolDefinitionShape,
+} from '@kb-labs/shared-tool-kit';
 
 // Re-export permission presets
 export {
