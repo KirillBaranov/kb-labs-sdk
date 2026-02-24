@@ -125,5 +125,5 @@ const env = myEnv.parse(ctx.runtime);
 
 ## Documentation
 
-- **Full Guide**: [kb-labs-shared/docs/DECLARATIVE-FLAGS-AND-ENV.md](../../../kb-labs-shared/docs/DECLARATIVE-FLAGS-AND-ENV.md)
-- **ADR**: [kb-labs-shared/docs/adr/0006-declarative-flags-and-env-systems.md](../../../kb-labs-shared/docs/adr/0006-declarative-flags-and-env-systems.md)
+- **Full Guide**: `kb-labs-shared/docs/DECLARATIVE-FLAGS-AND-ENV.md`
+- **ADR**: `kb-labs-shared/docs/adr/0006-declarative-flags-and-env-systems.md`
