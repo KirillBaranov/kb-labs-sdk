@@ -1,60 +1,51 @@
-## @kb-labs/sdk 0.1.2
+# Changelog — @kb-labs/sdk
 
-**0.1.1 → 0.1.2** (minor: new features)
+## 1.0.0 — 2026-02-24
 
-### ✨ New Features
+First stable release. Prior history represents internal R&D — this is the first versioned public release.
 
-- **lifecycle**: Introduces default configuration handling in setup output, making it easier for users to understand and manage their settings without manual adjustments.
-- **sdk**: Provides access to platform caches and a high-level setup helper, streamlining the setup process and improving overall user experience.
-- **sdk**: Exposes command errors, a setup builder, and manifest examples, enhancing user guidance and reducing confusion during implementation.
-- **sdk**: Adds new entry points for configuration, platform, and knowledge, empowering users with better resources and flexibility in their development process.
-- **sdk**: Replaces the template package with an SDK implementation, ensuring users benefit from a more robust and integrated solution for their projects.
+### Package
 
-### ♻️ Code Refactoring
+| Package | Version |
+|---------|---------|
+| `@kb-labs/sdk` | 1.0.0 |
 
-- **sdk**: Updates to UI exports enhance the consistency and usability of interface components, making it easier for developers to create visually appealing applications.
-- **sdk**: Further updates to UI exports streamline the integration process, allowing for faster implementation and reducing development time.
-- **sdk**: Refreshes exports to ensure that all components are up-to-date, providing users with the latest features and improvements for better performance.
-- **sdk**: Synchronizes helper exports to maintain compatibility across various modules, simplifying the development process and reducing potential errors.
+### What's included
 
-### 📝 Documentation
+**`@kb-labs/sdk`** — Core SDK for building KB Labs plugins and commands. Single entry point that re-exports stable helpers from across the platform.
 
-- **readme**: Updates license references to ensure users have the most accurate and current information regarding the software’s usage rights.
-- **sdk**: Refreshes the top-level README to provide clearer guidance and improve usability for new and existing users navigating the documentation.
+#### Command & Route definitions
 
----
+```ts
+import { defineCommand, defineRoute, defineAction, defineWebhook, defineWebSocket } from '@kb-labs/sdk'
+```
 
-*Generated automatically by [**@kb-labs/release-manager**](https://github.com/kb-labs/kb-labs)*
-*Part of the **KB Labs Platform** — Professional developer tools ecosystem*
+- `defineCommand` — declare a CLI command handler with typed context and flags
+- `defineRoute` — declare a REST API route handler
+- `defineAction` — declare a workflow action
+- `defineWebhook` — declare a webhook handler
+- `defineWebSocket` — declare a WebSocket handler
 
-<sub>© 2025 KB Labs. Released under KB Public License v1.1</sub>
-## @kb-labs/sdk 0.1.1
+#### Host detection
 
-**0.1.0 → 0.1.1** (minor: new features)
+```ts
+import { isCLIHost, isRESTHost, isWorkflowHost } from '@kb-labs/sdk'
+```
 
-### ✨ New Features
+Runtime guards to conditionally use host-specific APIs.
 
-- **lifecycle**: Introduces default configuration handling in setup output, ensuring users have a smoother setup experience without needing to manually configure every detail.
-- **sdk**: Makes platform caches and a high-level setup helper available, which simplifies the process of managing resources and speeds up the setup time for users.
-- **sdk**: Provides visibility into command errors, a setup builder, and manifest examples, enabling users to troubleshoot issues more effectively and understand how to utilize the SDK.
-- **sdk**: Adds new entry points for configuration, platform, and knowledge, empowering users to easily access essential information and tools for their projects.
-- **sdk**: Replaces the previous template package with a more robust SDK implementation, enhancing overall reliability and performance for users working on their applications.
+#### Testing
 
-### ♻️ Code Refactoring
+```ts
+import { createTestContext } from '@kb-labs/sdk'
+// or
+import { createTestContext } from '@kb-labs/sdk/testing'
+```
 
-- **sdk**: Enhances UI exports to ensure a more consistent and streamlined user experience when integrating various components.
-- **sdk**: Further refines UI exports, allowing developers to access the necessary tools more efficiently, which speeds up the development process.
-- **sdk**: Updates exports to provide better organization and accessibility of features, simplifying the integration of new functionalities for users.
-- **sdk**: Synchronizes helper exports to improve overall performance and reliability, making it easier for developers to implement helper functions without encountering issues.
+`createTestContext` — builds a mock plugin context for unit testing command handlers without a running platform.
 
-### 📝 Documentation
+### Notes
 
-- **readme**: Updates license references to ensure clarity and compliance, helping users understand their rights and responsibilities when using the software.
-- **sdk**: Refreshes the top-level README to provide clearer instructions and improved guidance, making it easier for users to get started and utilize the SDK effectively.
-
----
-
-*Generated automatically by [**@kb-labs/release-manager**](https://github.com/kb-labs/kb-labs)*
-*Part of the **KB Labs Platform** — Professional developer tools ecosystem*
-
-<sub>© 2025 KB Labs. Released under KB Public License v1.1</sub>
+- `@kb-labs/sdk` is the recommended entry point for all plugin development — do not import directly from `core-*` or `plugin-*` internals
+- `knowledge-core`, `knowledge-contracts`, and legacy `findNearestConfig` have been removed from SDK exports in 1.0.0 — import directly from their respective packages if needed
+- `studio-contracts` re-export is a known limitation; will be resolved when Studio is refactored into a standalone package
