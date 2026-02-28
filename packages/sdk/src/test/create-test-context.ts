@@ -171,9 +171,9 @@ function createMockUI(): UIFacade {
     newline: () => messages.push(''),
     divider: () => messages.push('─'.repeat(40)),
     box: (content, title) => {
-      if (title) messages.push(`┌─ ${title} ─┐`);
+      if (title) {messages.push(`┌─ ${title} ─┐`);}
       messages.push(content);
-      if (title) messages.push(`└${'─'.repeat(title.length + 4)}┘`);
+      if (title) {messages.push(`└${'─'.repeat(title.length + 4)}┘`);}
     },
     sideBox: (options) => {
       messages.push(`┌─ ${options.title} ─┐`);
@@ -184,7 +184,7 @@ function createMockUI(): UIFacade {
       }
       if (options.sections) {
         options.sections.forEach(section => {
-          if (section.header) messages.push(`  ${section.header}:`);
+          if (section.header) {messages.push(`  ${section.header}:`);}
           section.items.forEach(item => messages.push(`    ${item}`));
         });
       }
