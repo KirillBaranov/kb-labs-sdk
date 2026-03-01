@@ -1,0 +1,80 @@
+name: SDK Contracts
+
+on:
+  pull_request:
+    paths:
+      - 'packages/sdk/**'
+      - '.github/workflows/sdk-contracts.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/sdk/**'
+      - '.github/workflows/sdk-contracts.yml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: sdk-contracts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sdk-contracts:
+    name: SDK Contract Gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Fetch PR base branch
+        if: github.event_name == 'pull_request'
+        run: git fetch --no-tags origin ${{ github.base_ref }}:${{ github.base_ref }}
+
+      - name: Lint SDK
+        run: pnpm --filter @kb-labs/sdk lint
+
+      - name: Type check SDK
+        run: pnpm --filter @kb-labs/sdk type-check
+
+      - name: Run SDK tests
+        run: pnpm --filter @kb-labs/sdk test
+
+      - name: Verify exports glossary
+        run: |
+          pnpm --filter @kb-labs/sdk docs:exports
+          git diff --exit-code packages/sdk/EXPORTS-GLOSSARY.md
+
+      - name: Guard API removals without explicit ack
+        run: pnpm --filter @kb-labs/sdk check:api-removals
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+
+      - name: Build SDK
+        run: pnpm --filter @kb-labs/sdk build
+
+      - name: Verify package tarball (smoke)
+        run: pnpm --filter @kb-labs/sdk exec npm pack --dry-run
+
+      - name: Guard against deep dist imports
+        run: |
+          if rg -n "from ['\"]@kb-labs/sdk/dist/" packages/sdk/src; then
+            echo "Deep imports from @kb-labs/sdk/dist are forbidden."
+            exit 1
+          fi
