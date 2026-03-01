@@ -13,6 +13,11 @@ pnpm add @kb-labs/sdk
 | Entry Point | Description |
 |-------------|-------------|
 | `@kb-labs/sdk` | Main entry — all plugin building APIs |
+| `@kb-labs/sdk/command` | Command/route/action/webhook/websocket/message definitions |
+| `@kb-labs/sdk/manifest` | Manifest helpers and examples generator |
+| `@kb-labs/sdk/hooks` | Platform runtime hooks (`use*`) |
+| `@kb-labs/sdk/contracts` | Stable contracts and manifest/runtime contract helpers |
+| `@kb-labs/sdk/types` | Type-only entry point for contracts and SDK integration types |
 | `@kb-labs/sdk/testing` | Mock builders for unit testing |
 
 ## Quick Start
@@ -144,6 +149,21 @@ import { createTestContext } from '@kb-labs/sdk';
 // or full mock builders:
 import { ... } from '@kb-labs/sdk/testing';
 ```
+
+## API Stability
+
+- Treat all documented entry points as public API.
+- Prefer subpath imports for long-term stability:
+  - `@kb-labs/sdk/command`
+  - `@kb-labs/sdk/manifest`
+  - `@kb-labs/sdk/hooks`
+  - `@kb-labs/sdk/contracts`
+  - `@kb-labs/sdk/types`
+  - `@kb-labs/sdk/testing`
+- Avoid deep imports from `dist/` or internal files.
+- Export contracts are guarded by tests in `src/__tests__/entrypoint-contracts.test.ts`.
+- Export glossary is auto-generated in `EXPORTS-GLOSSARY.md` (`pnpm --filter @kb-labs/sdk docs:exports`).
+- Export removals require explicit acknowledgement in `BREAKING_CHANGE.md` (CI-enforced on PRs).
 
 ## License
 
