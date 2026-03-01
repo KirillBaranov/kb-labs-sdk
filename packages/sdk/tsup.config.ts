@@ -6,6 +6,11 @@ export default defineConfig({
   tsconfig: "tsconfig.build.json",
   entry: {
     index: 'src/index.ts',
+    'command/index': 'src/command/index.ts',
+    'manifest/index': 'src/manifest/index.ts',
+    'hooks/index': 'src/hooks/index.ts',
+    'contracts/index': 'src/contracts/index.ts',
+    'types/index': 'src/types/index.ts',
     'testing/index': 'src/testing/index.ts',
   },
 });
