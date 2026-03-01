@@ -62,7 +62,7 @@ export {
   type EnvDefinition,
 } from '@kb-labs/shared-cli-ui';
 
-// Re-export helpers from shared-command-kit (for convenience)
+// Re-export runtime hooks
 export {
   usePlatform,
   isPlatformConfigured,
@@ -81,6 +81,13 @@ export {
   useStorage,
   useCache,
   isCacheAvailable,
+  // LLM types (for tier-based selection)
+  type LLMTier,
+  type UseLLMOptions,
+} from './hooks/index.js';
+
+// Re-export helpers from shared-command-kit (for convenience)
+export {
   // REST handler definition
   defineHandler,
   type Handler,
@@ -92,9 +99,6 @@ export {
   commonErrors,
   type ErrorDefinition,
   type ErrorDefinitions,
-  // LLM types (for tier-based selection)
-  type LLMTier,
-  type UseLLMOptions,
 } from '@kb-labs/shared-command-kit';
 
 // Re-export new flags system from shared-command-kit
@@ -206,7 +210,7 @@ export type {
   WSSender,
   WSLifecycleEvent,
   WSInput,
-} from '@kb-labs/plugin-contracts';
+} from './contracts/index.js';
 
 // Re-export tool factory
 export {

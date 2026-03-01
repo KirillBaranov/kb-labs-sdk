@@ -2,11 +2,16 @@
  * Shared utilities
  */
 
+import type {
+  HostContext,
+  PluginContextV3,
+} from '@kb-labs/plugin-contracts';
+
 /**
  * Type-safe helper to extract host context type
  */
 export type ExtractHostContext<T extends string> = Extract<
-  import('@kb-labs/plugin-contracts').HostContext,
+  HostContext,
   { host: T }
 >;
 
@@ -14,7 +19,7 @@ export type ExtractHostContext<T extends string> = Extract<
  * Type-safe helper to narrow plugin context by host type
  */
 export type ContextForHost<T extends string, TConfig = unknown> = Omit<
-  import('@kb-labs/plugin-contracts').PluginContextV3<TConfig>,
+  PluginContextV3<TConfig>,
   'hostContext'
 > & {
   hostContext: ExtractHostContext<T>;
