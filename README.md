@@ -1,213 +1,306 @@
-# KB Labs SDK
+# Standard Configuration Templates
 
-> **The official facade for KB Labs plugin development.** A single stable entry point for building KB Labs plugins — commands, REST handlers, actions, webhooks, and more.
+This directory contains canonical configuration templates for all `@kb-labs` packages.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/Node.js-20.0.0+-green.svg)](https://nodejs.org/)
-[![pnpm](https://img.shields.io/badge/pnpm-9.11.0+-orange.svg)](https://pnpm.io/)
+## 📋 Available Templates
 
-## 🎯 Vision
+### Core Configs (All Packages)
 
-KB Labs SDK provides a **stable, versioned API** for plugin developers. Instead of importing from multiple internal packages (`@kb-labs/shared-command-kit`, `@kb-labs/plugin-manifest`, `@kb-labs/core-platform`, etc.), you import everything from `@kb-labs/sdk`.
+| File | Purpose | Required | Customizable |
+|------|---------|----------|--------------|
+| **eslint.config.js** | Linting rules | ✅ Yes | ⚠️ Minimal |
+| **tsconfig.json** | TypeScript IDE config | ✅ Yes | ❌ No |
+| **tsconfig.build.json** | TypeScript build config | ✅ Yes | ❌ No |
 
-**Benefits:**
-- **Single dependency** - Add only `@kb-labs/sdk` to your plugin
-- **Self-contained** - All internal packages are bundled (no transitive dependencies)
-- **Stable API** - Protected by snapshot tests, semantic versioning
-- **Type-safe** - Full TypeScript support with exported types
+### Tsup Configs (Choose ONE based on package type)
 
-## 🚀 Quick Start
+| Template | Package Type | Use Cases |
+|----------|--------------|-----------|
+| **tsup.config.ts** | 📦 **Library** (default) | Most packages, importable libraries |
+| **tsup.config.bin.ts** | 🔧 **Binary** | Standalone executables, CLI bins |
+| **tsup.config.cli.ts** | ⌨️ **CLI** | CLI packages with commands |
+| **tsup.config.dual.ts** | 📦🔧 **Library + Binary** | Packages with both API and bin |
 
+### Package.json Examples
+
+| Template | Purpose |
+|----------|---------|
+| **package.json.lib** | Library package example |
+| **package.json.bin** | Binary package example |
+
+## 🎯 Philosophy
+
+**Convention over Configuration**
+
+All `@kb-labs` packages MUST use these exact templates with minimal customization. This ensures:
+
+- ✅ Consistent build output across all packages
+- ✅ Predictable dependency resolution
+- ✅ Unified linting standards
+- ✅ Easy maintenance and upgrades
+
+## 📦 Usage
+
+### For New Packages
+
+#### Step 1: Choose Package Type
+
+**Library Package** (most common):
 ```bash
-pnpm add @kb-labs/sdk
-# or
-npm install @kb-labs/sdk
+cp kb-labs-devkit/templates/configs/tsup.config.ts your-package/
+cp kb-labs-devkit/templates/configs/eslint.config.js your-package/
+cp kb-labs-devkit/templates/configs/tsconfig*.json your-package/
+cp kb-labs-devkit/templates/configs/package.json.lib your-package/package.json
 ```
 
-```typescript
-import {
-  defineCommand,
-  defineManifest,
-  useLogger,
-  type CommandResult,
-} from '@kb-labs/sdk';
+**Binary Package** (standalone executables):
+```bash
+cp kb-labs-devkit/templates/configs/tsup.config.bin.ts your-package/tsup.config.ts
+cp kb-labs-devkit/templates/configs/eslint.config.js your-package/
+cp kb-labs-devkit/templates/configs/tsconfig*.json your-package/
+cp kb-labs-devkit/templates/configs/package.json.bin your-package/package.json
+```
 
-// Define a command
-export const hello = defineCommand({
-  name: 'hello',
-  flags: {
-    name: { type: 'string', description: 'Name to greet' },
-  },
-  async handler(ctx, _argv, flags): Promise<CommandResult> {
-    const logger = useLogger();
-    logger.info('Running hello command');
-    ctx.output?.write(`Hello, ${flags.name ?? 'world'}!`);
-    return { ok: true };
-  },
+**CLI Package** (command handlers):
+```bash
+cp kb-labs-devkit/templates/configs/tsup.config.cli.ts your-package/tsup.config.ts
+cp kb-labs-devkit/templates/configs/eslint.config.js your-package/
+cp kb-labs-devkit/templates/configs/tsconfig*.json your-package/
+cp kb-labs-devkit/templates/configs/package.json.lib your-package/package.json
+```
+
+**Dual Package** (library + binary):
+```bash
+cp kb-labs-devkit/templates/configs/tsup.config.dual.ts your-package/tsup.config.ts
+cp kb-labs-devkit/templates/configs/eslint.config.js your-package/
+cp kb-labs-devkit/templates/configs/tsconfig*.json your-package/
+cp kb-labs-devkit/templates/configs/package.json.lib your-package/package.json
+# Then add "bin" field to package.json
+```
+
+#### Step 2: Customize Package Name
+```bash
+# Edit package.json and update name, description
+```
+
+### For Existing Packages
+
+```bash
+# Check for drift
+npx kb-devkit-check-configs
+
+# Auto-fix drift
+npx kb-devkit-check-configs --fix
+```
+
+## 🔧 Customization Rules
+
+### tsup.config.ts
+
+**Allowed customizations:**
+
+```typescript
+export default defineConfig({
+  ...nodePreset,
+  tsconfig: 'tsconfig.build.json', // ✅ Always required
+
+  // ✅ OK: Multiple entry points
+  entry: ['src/index.ts', 'src/cli.ts'],
+
+  // ✅ OK: Extra external deps (if really needed)
+  external: ['special-native-module'],
+
+  dts: true, // ✅ Always required
 });
 ```
 
-For detailed API documentation, see [packages/sdk/README.md](./packages/sdk/README.md).
+**NOT allowed:**
 
-## 📁 Repository Structure
+```typescript
+// ❌ WRONG: Don't override preset settings
+export default defineConfig({
+  format: ['esm'],        // Already in preset!
+  target: 'es2022',       // Already in preset!
+  sourcemap: true,        // Already in preset!
+  // ...
+});
 
-```
-kb-labs-sdk/
-├── packages/
-│   └── sdk/                    # Main SDK package (@kb-labs/sdk)
-│       ├── src/
-│       │   ├── index.ts        # Main entry point (re-exports all)
-│       │   ├── command/        # Command/route/action/webhook definitions
-│       │   ├── manifest/       # Plugin manifest utilities
-│       │   ├── test/           # Legacy test utilities (createTestContext)
-│       │   ├── testing/        # Full mock builders (./testing entry point)
-│       │   └── utils/          # Type utilities (ExtractHostContext, etc.)
-│       └── README.md           # Package API reference
-├── docs/
-│   ├── adr/                    # Architecture Decision Records
-│   └── DOCUMENTATION.md        # Documentation standards
-├── CONTRIBUTING.md             # Contribution guide
-└── README.md                   # This file
+// ❌ WRONG: Don't disable types
+dts: false,
+
+// ❌ WRONG: Don't duplicate external deps
+external: [
+  '@kb-labs/core',  // Already in preset!
+  '@kb-labs/cli',   // Already in preset!
+],
 ```
 
-## 📦 Entry Points
+### eslint.config.js
 
-| Entry Point | Description |
-|-------------|-------------|
-| `@kb-labs/sdk` | Main entry — commands, manifest, platform helpers, types |
-| `@kb-labs/sdk/testing` | Full mock builders for unit testing plugins |
+**Allowed customizations:**
 
-## 🧩 Bundled Packages
+```javascript
+export default [
+  ...nodePreset,
+  {
+    // ✅ OK: Project-specific ignores only
+    ignores: ['**/*.generated.ts']
+  }
+];
+```
 
-These internal packages are bundled into SDK's dist (plugin developers don't need to install them separately):
+**NOT allowed:**
 
-- `@kb-labs/shared-command-kit` - Platform helpers (useLogger, useLLM, useCache, etc.)
-- `@kb-labs/shared-cli-ui` - CLI UI components (loaders, artifacts, env system)
-- `@kb-labs/shared-tool-kit` - Tool factory (createTool)
-- `@kb-labs/perm-presets` - Permission presets
-- `@kb-labs/plugin-contracts` - Plugin context types (V3)
-- `@kb-labs/core-platform` - Platform adapter types (ILLM, ICache, ILogger, etc.)
-- `@kb-labs/core-runtime` - Runtime monitoring (getMonitoringSnapshot)
-- `@kb-labs/core-sys` - System utilities (findRepoRoot)
-- `@kb-labs/studio-contracts` - Studio widget data types (for REST handlers)
+```javascript
+// ❌ WRONG: Don't duplicate preset ignores
+export default [
+  ...nodePreset,
+  {
+    ignores: [
+      '**/dist/**',        // Already in preset!
+      '**/node_modules/**', // Already in preset!
+    ]
+  }
+];
+```
 
-## 🛠️ Development
+### tsconfig.json & tsconfig.build.json
 
-### Prerequisites
+**NOT customizable!**
 
-- Node.js >= 20.0.0
-- pnpm >= 9.11.0
+These files MUST remain identical to templates. All TypeScript configuration is standardized in DevKit presets.
 
-### Setup
+```json
+// ❌ WRONG: Don't override extends
+{
+  "extends": "./my-custom-base.json"
+}
+
+// ❌ WRONG: Don't add compilerOptions
+{
+  "extends": "@kb-labs/devkit/tsconfig/node.json",
+  "compilerOptions": {
+    "strict": false  // Don't override preset!
+  }
+}
+```
+
+## 🔍 Drift Detection
+
+DevKit automatically detects configuration drift:
 
 ```bash
-# Install dependencies
-pnpm install
+# Check all packages
+npx kb-devkit-check-configs
 
-# Build SDK
-pnpm --filter @kb-labs/sdk build
+# Check specific package
+npx kb-devkit-check-configs --package=@kb-labs/core
 
-# Run tests
-pnpm --filter @kb-labs/sdk test
+# Auto-fix (creates backup)
+npx kb-devkit-check-configs --fix
 
-# Type check
-pnpm --filter @kb-labs/sdk type-check
+# CI mode (fail on drift)
+npx kb-devkit-check-configs --ci
 ```
 
-### Build Configuration
+### Drift Detection Rules
 
-SDK uses the `@kb-labs/devkit/tsup/sdk.js` preset for bundling:
+| Issue | Severity | Auto-fix |
+|-------|----------|----------|
+| Missing `dts: true` | 🔴 Error | ✅ Yes |
+| Using `dts: false` | 🔴 Error | ✅ Yes |
+| Not using `nodePreset` | 🔴 Error | ⚠️ Manual |
+| Duplicate `external` | 🟡 Warning | ✅ Yes |
+| Duplicate `ignores` | 🟡 Warning | ✅ Yes |
+| Missing templates | 🔴 Error | ✅ Yes |
+| Modified templates | 🔴 Error | ⚠️ Manual |
 
-- Bundles all `@kb-labs/*` workspace packages into dist
-- ESM format with TypeScript declarations
-- Node.js built-ins kept external
-- Problematic CJS packages (execa, glob, yaml, etc.) kept external
+## 📚 Examples
 
-## 📊 Stability Tiers
-
-| Tier | Description | Entry Points |
-|------|-------------|--------------|
-| **Stable** | Production-ready, semantic versioning | `@kb-labs/sdk` (main entry) |
-| **Beta** | API may change in minor versions | `getMonitoringSnapshot`, `getDegradedStatus` |
-| **Experimental** | No stability guarantees | `@kb-labs/sdk/testing` |
-
-## 📚 Documentation
-
-- [Package README](./packages/sdk/README.md) - API reference with examples
-- [Documentation Standards](./docs/DOCUMENTATION.md) - Documentation guidelines
-- [Contributing Guide](./CONTRIBUTING.md) - How to contribute
-
-### Architecture Decision Records
-
-- [ADR-0001: Architecture and Repository Layout](./docs/adr/0001-architecture-and-repository-layout.md)
-- [ADR-0002: Plugins and Extensibility](./docs/adr/0002-plugins-and-extensibility.md)
-- [ADR-0003: Package and Module Boundaries](./docs/adr/0003-package-and-module-boundaries.md)
-- [ADR-0004: Versioning and Release Policy](./docs/adr/0004-versioning-and-release-policy.md)
-- [ADR-0005: Use DevKit for Shared Tooling](./docs/adr/0005-use-devkit-for-shared-tooling.md)
-
-## 🔗 Related Packages
-
-### Used By
-
-- All KB Labs plugins (the SDK is the primary plugin dependency)
-
-### Ecosystem
-
-- [KB Labs](https://github.com/KirillBaranov/kb-labs) - Main ecosystem repository
-- [KB Labs DevKit](https://github.com/KirillBaranov/kb-labs-devkit) - Build tooling
-
-## 📋 Requirements
-
-- **Node.js:** >= 20.0.0
-- **pnpm:** >= 9.11.0
-
-## Migrating from Internal Packages
-
-### Before (multiple dependencies)
-
-```json
-{
-  "dependencies": {
-    "@kb-labs/shared-command-kit": "workspace:*",
-    "@kb-labs/plugin-manifest": "workspace:*",
-    "@kb-labs/shared-cli-ui": "workspace:*",
-    "@kb-labs/core-sys": "workspace:*"
-  }
-}
-```
+### ✅ Good Example (Minimal Package)
 
 ```typescript
-import { defineCommand } from '@kb-labs/shared-command-kit';
-import { defineManifest } from '@kb-labs/plugin-manifest';
-import { keyValue } from '@kb-labs/shared-cli-ui';
-import { findRepoRoot } from '@kb-labs/core-sys';
+// tsup.config.ts
+import { defineConfig } from 'tsup';
+import nodePreset from '@kb-labs/devkit/tsup/node.js';
+
+export default defineConfig({
+  ...nodePreset,
+  tsconfig: 'tsconfig.build.json',
+  entry: ['src/index.ts'],
+  dts: true,
+});
 ```
 
-### After (single dependency)
-
-```json
-{
-  "dependencies": {
-    "@kb-labs/sdk": "workspace:*"
-  }
-}
-```
+### ✅ Good Example (CLI Package with Multiple Entries)
 
 ```typescript
-import {
-  defineCommand,
-  defineManifest,
-  keyValue,
-  findRepoRoot,
-} from '@kb-labs/sdk';
+// tsup.config.ts
+import { defineConfig } from 'tsup';
+import nodePreset from '@kb-labs/devkit/tsup/node.js';
+
+export default defineConfig({
+  ...nodePreset,
+  tsconfig: 'tsconfig.build.json',
+  entry: [
+    'src/index.ts',
+    'src/cli/index.ts',
+    'src/cli/commands/build.ts',
+    'src/cli/commands/test.ts',
+  ],
+  dts: true,
+});
 ```
 
+### ❌ Bad Example (Over-configured)
 
+```typescript
+// tsup.config.ts
+import { defineConfig } from 'tsup';
 
-## 📄 License
+// ❌ Not using preset!
+export default defineConfig({
+  format: ['esm'],
+  target: 'es2022',
+  sourcemap: true,
+  clean: true,
+  dts: true,
+  entry: ['src/index.ts'],
+  external: [/^@kb-labs\/.*/],  // Manual external
+});
+```
 
-MIT © KB Labs — see [LICENSE](LICENSE) for details.
+## 🚀 Migration Guide
 
----
+### From Custom Config to Standard Template
 
-**See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines and contribution process.**
+1. **Backup your current config**
+   ```bash
+   cp tsup.config.ts tsup.config.ts.backup
+   ```
+
+2. **Copy standard template**
+   ```bash
+   cp kb-labs-devkit/templates/configs/tsup.config.ts .
+   ```
+
+3. **Migrate customizations** (only if needed)
+   - Compare your backup with template
+   - Extract only truly necessary customizations
+   - Add them with comments explaining why
+
+4. **Test build**
+   ```bash
+   pnpm run build
+   ```
+
+5. **Verify types**
+   ```bash
+   npx kb-devkit-check-types
+   ```
+
+## 🔗 Related
+
+- [DevKit README](../../README.md)
+- [DevKit Usage Guide](../../USAGE_GUIDE.md)
+- [ADR-0009: Unified Build Convention](../../docs/adr/0009-unified-build-convention.md)
