@@ -47,5 +47,8 @@ pnpm --filter @kb-labs/sdk build
 `src/__tests__/entrypoint-contracts.test.ts` is the minimum export compatibility gate.
 `EXPORTS-GLOSSARY.md` must be in sync with current entrypoints.
 Removing public exports is blocked in PR CI unless `BREAKING_CHANGE.md` is updated.
+Deep regression checks live in:
+- `src/__tests__/deep-behavior.test.ts` (runtime behavior invariants)
+- `src/__type-tests__/sdk-typing.type-test.ts` (compile-time typing invariants)
 
 In CI, use `.github/workflows/sdk-contracts.yml` as a required check for SDK-focused PRs.
