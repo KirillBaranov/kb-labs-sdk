@@ -69,7 +69,7 @@
     "@kb-labs/shared-command-kit": "workspace:*",
     "@kb-labs/shared-testing": "workspace:*",
     "@kb-labs/shared-tool-kit": "workspace:*",
-    "@kb-labs/studio-contracts": "link:../../../kb-labs-studio/packages/studio-contracts"
+    "@kb-labs/studio-contracts": "workspace:*"
   },
   "devDependencies": {
     "@kb-labs/devkit": "workspace:*",
