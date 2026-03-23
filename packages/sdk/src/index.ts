@@ -137,7 +137,7 @@ export type {
 } from '@kb-labs/core-platform';
 
 // Re-export sys utilities
-export { findRepoRoot } from '@kb-labs/core-sys';
+export { findRepoRoot, discoverSubRepoPaths } from '@kb-labs/core-sys';
 
 
 // Re-export monitoring from runtime

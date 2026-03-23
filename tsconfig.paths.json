@@ -28,10 +28,10 @@
         "../kb-labs-shared/packages/shared-perm-presets/src/*"
       ],
       "@kb-labs/plugin-contracts": [
-        "../kb-labs-plugin/packages/plugin-contracts/src/index.ts"
+        "../../infra/kb-labs-plugin/packages/plugin-contracts/src/index.ts"
       ],
       "@kb-labs/plugin-contracts/*": [
-        "../kb-labs-plugin/packages/plugin-contracts/src/*"
+        "../../infra/kb-labs-plugin/packages/plugin-contracts/src/*"
       ],
       "@kb-labs/shared-cli-ui": [
         "../kb-labs-shared/packages/shared-cli-ui/src/index.ts"
