@@ -240,50 +240,9 @@ export {
   type PresetBuilder,
 } from '@kb-labs/perm-presets';
 
-// Re-export Studio widget data types (for REST handlers)
+// Studio V2 types (Module Federation pages)
 export type {
-  // Form widgets
-  SelectData,
-  SelectOptionItem,
-  InputData,
-  FormData,
-  FormFieldError,
-  CheckboxGroupData,
-  CheckboxItem,
-  SwitchData,
-  DatePickerData,
-  // Display widgets
-  MetricData,
-  MetricGroupData,
-  TableData,
-  TableRow,
-  CardData,
-  CardListData,
-  TimelineData,
-  TimelineItem,
-  TreeData,
-  TreeNode,
-  JsonData,
-  DiffData,
-  LogsData,
-  LogEntry,
-  // Chart widgets
-  ChartLineData,
-  ChartBarData,
-  ChartPieData,
-  ChartAreaData,
-  ChartSeries,
-  ChartDataPoint,
-  PieSlice,
-  // Navigation widgets
-  BreadcrumbData,
-  BreadcrumbItemDef,
-  StepperData,
-  StepDef,
-  MenuData,
-  MenuItemDef,
-  // Feedback widgets
-  AlertData,
-  ModalData,
-  ConfirmData,
-} from '@kb-labs/studio-contracts';
+  StudioConfig,
+  StudioPageEntry,
+  StudioMenuEntry,
+} from '@kb-labs/plugin-contracts';

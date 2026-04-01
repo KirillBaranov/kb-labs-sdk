@@ -37,6 +37,11 @@
       "import": "./dist/types/index.js",
       "require": "./dist/types/index.cjs"
     },
+    "./studio": {
+      "types": "./dist/studio/index.d.ts",
+      "import": "./dist/studio/index.js",
+      "require": "./dist/studio/index.cjs"
+    },
     "./testing": {
       "types": "./dist/testing/index.d.ts",
       "import": "./dist/testing/index.js",
@@ -69,7 +74,10 @@
     "@kb-labs/shared-command-kit": "link:../../../kb-labs-shared/packages/shared-command-kit",
     "@kb-labs/shared-testing": "link:../../../kb-labs-shared/packages/shared-testing",
     "@kb-labs/shared-tool-kit": "link:../../../kb-labs-shared/packages/shared-tool-kit",
-    "@kb-labs/studio-contracts": "link:../../../kb-labs-studio/packages/studio-contracts"
+    "@kb-labs/studio-hooks": "link:../../../kb-labs-studio/packages/studio-hooks",
+    "@kb-labs/studio-event-bus": "link:../../../kb-labs-studio/packages/studio-event-bus",
+    "@kb-labs/studio-ui-kit": "link:../../../kb-labs-studio/packages/studio-ui-kit",
+    "@kb-labs/studio-ui-core": "link:../../../kb-labs-studio/packages/studio-ui-core"
   },
   "devDependencies": {
     "@kb-labs/devkit": "link:../../../../infra/kb-labs-devkit",
