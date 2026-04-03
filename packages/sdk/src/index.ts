@@ -246,3 +246,14 @@ export type {
   StudioPageEntry,
   StudioMenuEntry,
 } from '@kb-labs/plugin-contracts';
+
+// UIKit data contracts (REST response shapes)
+export type {
+  TableData,
+  TableRow,
+  SelectData,
+  SelectOptionItem,
+  MetricData,
+  ListData,
+  ListItem,
+} from '@kb-labs/studio-ui-kit';

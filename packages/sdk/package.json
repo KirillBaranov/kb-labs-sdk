@@ -77,7 +77,8 @@
     "@kb-labs/studio-hooks": "link:../../../kb-labs-studio/packages/studio-hooks",
     "@kb-labs/studio-event-bus": "link:../../../kb-labs-studio/packages/studio-event-bus",
     "@kb-labs/studio-ui-kit": "link:../../../kb-labs-studio/packages/studio-ui-kit",
-    "@kb-labs/studio-ui-core": "link:../../../kb-labs-studio/packages/studio-ui-core"
+    "@kb-labs/studio-ui-core": "link:../../../kb-labs-studio/packages/studio-ui-core",
+    "@kb-labs/studio-devtools": "link:../../../kb-labs-studio/packages/studio-devtools"
   },
   "devDependencies": {
     "@kb-labs/devkit": "link:../../../../infra/kb-labs-devkit",

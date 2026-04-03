@@ -59,6 +59,11 @@ export type { EventMeta, EventHandler } from '@kb-labs/studio-event-bus';
 
 export * from '@kb-labs/studio-ui-kit';
 
+// ─── DevTools (for plugin developers) ───────────────────────────────
+
+export { devToolsStore, GenericChannel } from '@kb-labs/studio-devtools';
+export type { DevToolsChannel, DevToolsPlugin, MFEvent, EventBusEvent } from '@kb-labs/studio-devtools';
+
 // ─── Manifest types ─────────────────────────────────────────────────
 
 export type {
