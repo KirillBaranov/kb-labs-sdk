@@ -1,6 +1,6 @@
 {
   "name": "@kb-labs/sdk-entry",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Plugin System SDK - Helpers for command/route/action/webhook definitions and testing",
   "type": "module",
   "author": {
