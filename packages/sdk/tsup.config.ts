@@ -13,5 +13,6 @@ export default defineConfig({
     'types/index': 'src/types/index.ts',
     'testing/index': 'src/testing/index.ts',
     'studio/index': 'src/studio/index.ts',
+    'studio-build/index': 'src/studio-build/index.ts',
   },
 });

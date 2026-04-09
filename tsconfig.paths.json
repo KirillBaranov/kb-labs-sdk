@@ -75,6 +75,12 @@
       "@kb-labs/studio-hooks/*": [
         "../kb-labs-studio/packages/studio-hooks/src/*"
       ],
+      "@kb-labs/studio-plugin-tools": [
+        "../kb-labs-studio/packages/studio-plugin-tools/src/index.ts"
+      ],
+      "@kb-labs/studio-plugin-tools/*": [
+        "../kb-labs-studio/packages/studio-plugin-tools/src/*"
+      ],
       "@kb-labs/studio-ui-core": [
         "../kb-labs-studio/packages/studio-ui-core/src/index.ts"
       ],

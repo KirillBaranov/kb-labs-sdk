@@ -42,6 +42,11 @@
       "import": "./dist/studio/index.js",
       "require": "./dist/studio/index.cjs"
     },
+    "./studio-build": {
+      "types": "./dist/studio-build/index.d.ts",
+      "import": "./dist/studio-build/index.js",
+      "require": "./dist/studio-build/index.cjs"
+    },
     "./testing": {
       "types": "./dist/testing/index.d.ts",
       "import": "./dist/testing/index.js",
@@ -65,23 +70,24 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@kb-labs/core-platform": "^1.4.0",
-    "@kb-labs/core-runtime": "^1.4.0",
-    "@kb-labs/core-sys": "^1.4.0",
-    "@kb-labs/perm-presets": "^1.2.0",
-    "@kb-labs/plugin-contracts": "^1.2.0",
-    "@kb-labs/shared-cli-ui": "^1.2.0",
-    "@kb-labs/shared-command-kit": "^1.2.0",
-    "@kb-labs/shared-testing": "^1.2.0",
-    "@kb-labs/shared-tool-kit": "^1.2.0",
-    "@kb-labs/studio-hooks": "^0.3.0",
-    "@kb-labs/studio-event-bus": "^0.3.0",
-    "@kb-labs/studio-ui-kit": "^0.3.0",
-    "@kb-labs/studio-ui-core": "^0.3.0",
-    "@kb-labs/studio-devtools": "^0.3.0"
+    "@kb-labs/core-platform": "link:../../../kb-labs-core/packages/core-platform",
+    "@kb-labs/core-runtime": "link:../../../kb-labs-core/packages/core-runtime",
+    "@kb-labs/core-sys": "link:../../../kb-labs-core/packages/core-sys",
+    "@kb-labs/perm-presets": "link:../../../kb-labs-shared/packages/shared-perm-presets",
+    "@kb-labs/plugin-contracts": "link:../../../../infra/kb-labs-plugin/packages/plugin-contracts",
+    "@kb-labs/shared-cli-ui": "link:../../../kb-labs-shared/packages/shared-cli-ui",
+    "@kb-labs/shared-command-kit": "link:../../../kb-labs-shared/packages/shared-command-kit",
+    "@kb-labs/shared-testing": "link:../../../kb-labs-shared/packages/shared-testing",
+    "@kb-labs/shared-tool-kit": "link:../../../kb-labs-shared/packages/shared-tool-kit",
+    "@kb-labs/studio-hooks": "link:../../../kb-labs-studio/packages/studio-hooks",
+    "@kb-labs/studio-event-bus": "link:../../../kb-labs-studio/packages/studio-event-bus",
+    "@kb-labs/studio-ui-kit": "link:../../../kb-labs-studio/packages/studio-ui-kit",
+    "@kb-labs/studio-ui-core": "link:../../../kb-labs-studio/packages/studio-ui-core",
+    "@kb-labs/studio-devtools": "link:../../../kb-labs-studio/packages/studio-devtools",
+    "@kb-labs/studio-plugin-tools": "link:../../../kb-labs-studio/packages/studio-plugin-tools"
   },
   "devDependencies": {
-    "@kb-labs/devkit": "^1.2.0",
+    "@kb-labs/devkit": "link:../../../../infra/kb-labs-devkit",
     "@types/node": "^24.3.3",
     "@vitest/ui": "^3.0.0",
     "rimraf": "^6.0.1",
